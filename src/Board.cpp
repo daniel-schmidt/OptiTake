@@ -5,11 +5,11 @@ namespace OptiTake
 {
     Board::Board() 
     {
-        tiles[0] = {3, std::nullopt};
-        tiles[1] = {4, std::nullopt};
-        tiles[2] = {5, std::nullopt};
-        tiles[3] = {4, std::nullopt};
-        tiles[4] = {3, std::nullopt};
+        tiles[0] = {3, Tile{}};
+        tiles[1] = {4, Tile{}};
+        tiles[2] = {5, Tile{}};
+        tiles[3] = {4, Tile{}};
+        tiles[4] = {3, Tile{}};
     }
 
 
@@ -25,10 +25,10 @@ namespace OptiTake
         }
 
         auto & tileAtPos = currentCol[pos.posInCol];
-        if(tileAtPos.has_value()) {
+        if(!tileAtPos.empty()) {
             return false;
         }
-        
+
         tileAtPos = newTile;
         return true;
     }

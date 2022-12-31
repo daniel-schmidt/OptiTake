@@ -1,19 +1,26 @@
 #pragma once
 #include <array>
 #include <iosfwd>
+#include <string>
 
 namespace OptiTake
 {
     struct Tile
     {
-        int x;
-        int y;
-        int z;
+        int x = -1;
+        int y = -1;
+        int z = -1;
+
+        [[nodiscard]] bool empty() const;
 
         auto operator<=>(Tile const &) const = default;
     };
 
     std::ostream &operator<<(std::ostream &strm, Tile const &t);
+    
+    enum class Axis{ x, y, z };
+
+    std::string ToString(Tile const &t, Axis ax);
 
     static constexpr std::array<Tile, 27> allPossibleTiles{ 
         Tile{1, 2, 3}, 
