@@ -59,35 +59,43 @@ namespace
 }
 
 
-Tile drawRandomTile(std::vector<Tile> & possibleTiles, std::minstd_rand0 & gen) {
-    assert (!possibleTiles.empty());
-    if (possibleTiles.size() == 1){
-        return possibleTiles[0];
+class RemainingTiles 
+{
+public:
+    RemainingTiles()
+    {
+        std::ranges::copy(allPossibleTiles, std::back_inserter(availableTiles));
     }
-    int numberTiles = possibleTiles.size() -1;
-    std::uniform_int_distribution<> distrib(0, numberTiles);
 
-    int chosenIndex = distrib(gen);
-    Tile chosenTile = possibleTiles[chosenIndex];
-    std::erase(possibleTiles, chosenTile);
-    return chosenTile;
+    Tile drawRandomTile() 
+    {
+        assert (!availableTiles.empty());
+        if (availableTiles.size() == 1){
+            return availableTiles[0];
+        }
+        int numberTiles = availableTiles.size() -1;
+        std::uniform_int_distribution<> distrib(0, numberTiles);
 
-}
+        int chosenIndex = distrib(gen);
+        Tile chosenTile = availableTiles[chosenIndex];
+        std::erase(availableTiles, chosenTile);
+        return chosenTile;
+    }
+
+private:
+    std::vector<Tile> availableTiles{};
+    std::random_device rd;
+    std::default_random_engine gen{rd()};
+};
 
 
 int main()
 {
-    std::vector<Tile> availableTiles{};
-    std::ranges::copy(allPossibleTiles, std::back_inserter(availableTiles));
-
-    std::random_device rd;
-    std::default_random_engine gen(rd());
-
+    std::cout << "This is the game Take it Easy!" << std::endl;
+    RemainingTiles remainingTiles{};
     for (int i = 0; i < 19; ++i){
-        Tile chosenTile = drawRandomTile(availableTiles, gen);
-        std::cout << "Hello. You have chosen tile " << chosenTile << "\n";
+        Tile chosenTile = remainingTiles.drawRandomTile();
+        std::cout << "The chosen tile is " << chosenTile << ".\n";
     }
     std::cout << "Game over!" << std::endl;
-
-
 }
