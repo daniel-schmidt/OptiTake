@@ -56,6 +56,17 @@ namespace
 }
 
 
+Tile drawRandomTile(std::vector<Tile> & possibleTiles, std::minstd_rand0 & gen) {
+    int numberTiles = possibleTiles.size() -1;
+    std::uniform_int_distribution<> distrib(0, numberTiles);
+
+    int chosenIndex = distrib(gen);
+    Tile chosenTile = possibleTiles[chosenIndex];
+    std::erase(possibleTiles, chosenTile);
+    return chosenTile;
+}
+
+
 int main()
 {
     std::vector<Tile> availableTiles{};
@@ -63,11 +74,8 @@ int main()
 
     std::random_device rd;
     std::default_random_engine gen(rd());
-    std::uniform_int_distribution<> distrib(0, 26);
 
-    int chosenIndex = distrib(gen);
-    Tile chosenTile = availableTiles[chosenIndex];
-    std::erase(availableTiles, chosenTile);
+    Tile chosenTile = drawRandomTile(availableTiles, gen);
 
     std::cout << "Hello Daniel. Du hast " << chosenTile << " gezogen!\n";
 }
