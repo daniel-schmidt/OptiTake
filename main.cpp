@@ -1,10 +1,13 @@
 #include <algorithm>
 #include <array>
+#include <cassert>
 #include <iostream>
 #include <iterator>
+#include <ostream>
 #include <random>
 #include <string>
 #include <vector>
+
 
 namespace
 {
@@ -57,6 +60,10 @@ namespace
 
 
 Tile drawRandomTile(std::vector<Tile> & possibleTiles, std::minstd_rand0 & gen) {
+    assert (!possibleTiles.empty());
+    if (possibleTiles.size() == 1){
+        return possibleTiles[0];
+    }
     int numberTiles = possibleTiles.size() -1;
     std::uniform_int_distribution<> distrib(0, numberTiles);
 
@@ -64,6 +71,7 @@ Tile drawRandomTile(std::vector<Tile> & possibleTiles, std::minstd_rand0 & gen) 
     Tile chosenTile = possibleTiles[chosenIndex];
     std::erase(possibleTiles, chosenTile);
     return chosenTile;
+
 }
 
 
@@ -75,7 +83,11 @@ int main()
     std::random_device rd;
     std::default_random_engine gen(rd());
 
-    Tile chosenTile = drawRandomTile(availableTiles, gen);
+    for (int i = 0; i < 19; ++i){
+        Tile chosenTile = drawRandomTile(availableTiles, gen);
+        std::cout << "Hello. You have chosen tile " << chosenTile << "\n";
+    }
+    std::cout << "Game over!" << std::endl;
 
-    std::cout << "Hello Daniel. Du hast " << chosenTile << " gezogen!\n";
+
 }
