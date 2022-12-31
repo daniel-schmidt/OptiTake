@@ -1,5 +1,6 @@
 # cmake build directory
 build
 
-# clangd cache
+# clangd
 .cache
+compile_commands.json
