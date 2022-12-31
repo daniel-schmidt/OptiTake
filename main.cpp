@@ -16,7 +16,7 @@ using namespace OptiTake;
 
 int main()
 {
-    std::cout << "This is the game Take it Easy!" << std::endl;
+    std::cout << "This is the game Take it Easy!\n";
     RemainingTiles remainingTiles{};
     Board board{};
     
@@ -36,7 +36,9 @@ int main()
                 std::cout << "This is not a valid, free position. Try again!\n";
             }
         }
+
+        std::cout << "Current score: " << board.GetScore() << "\n";
     }
     std::cout << "The final board is:\n" << board << "\n";
-    std::cout << "Game over!" << std::endl;
+    std::cout << "Game over! You finished with a final score of " << board.GetScore() << ".\n";
 }

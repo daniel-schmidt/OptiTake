@@ -22,6 +22,8 @@ public:
     Board();
     [[nodiscard]] bool SetTileToPosition(Tile const &newTile, BoardPosition pos);
 
+    [[nodiscard]] int GetScore() const;
+
     friend std::ostream & operator<<(std::ostream & strm, Board const & board)
     {
         strm << "         ___\n";
