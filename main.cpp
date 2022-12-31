@@ -1,6 +1,10 @@
-#include <iostream>
-#include <string>
+#include <algorithm>
 #include <array>
+#include <iostream>
+#include <iterator>
+#include <random>
+#include <string>
+#include <vector>
 
 namespace
 {
@@ -9,6 +13,8 @@ namespace
         int x;
         int y;
         int z;
+
+        auto operator<=>(Tile const &) const = default;
     };
 
 
@@ -52,6 +58,16 @@ namespace
 
 int main()
 {
-    Tile const t = allPossibleTiles[23];    
-    std::cout << "Hello Daniel. Du hast " << t << " gezogen!\n";
+    std::vector<Tile> availableTiles{};
+    std::ranges::copy(allPossibleTiles, std::back_inserter(availableTiles));
+
+    std::random_device rd;
+    std::default_random_engine gen(rd());
+    std::uniform_int_distribution<> distrib(0, 26);
+
+    int chosenIndex = distrib(gen);
+    Tile chosenTile = availableTiles[chosenIndex];
+    std::erase(availableTiles, chosenTile);
+
+    std::cout << "Hello Daniel. Du hast " << chosenTile << " gezogen!\n";
 }
