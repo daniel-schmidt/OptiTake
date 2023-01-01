@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <array>
 #include <cassert>
+#include <cstdio>
 #include <iostream>
 #include <iterator>
 #include <ostream>
@@ -26,16 +27,16 @@ int main()
         
         bool success = false;
         while (!success) {
-            std::cout << "Please insert a position: ";
+            std::cout << "Please insert a position (format: column row): ";
             int colIndex = 0;
-            std::cin >> colIndex;
             int posInCol = 0;
-            std::cin >> posInCol;
+            std::cin >> colIndex >> posInCol;
             success = board.SetTileToPosition(chosenTile, {colIndex, posInCol});
             if(!success) {
                 std::cout << "This is not a valid, free position. Try again!\n";
             }
         }
     }
+    std::cout << "The final board is:\n" << board << "\n";
     std::cout << "Game over!" << std::endl;
 }

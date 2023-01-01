@@ -26,4 +26,4 @@ namespace OptiTake
         return t.empty() ? "_" : std::to_string(t.z);
       }
     }
-    } // namespace OptiTake
+} // namespace OptiTake
