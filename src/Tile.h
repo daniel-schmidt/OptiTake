@@ -16,12 +16,16 @@ namespace OptiTake
         auto operator<=>(Tile const &) const = default;
     };
 
+    // for printing the current tile on the console
     std::ostream &operator<<(std::ostream &strm, Tile const &t);
     
+    // to display the numbers in the tile at the correct position
     enum class Axis{ x, y, z };
 
+    // to draw the tiles on the board, either empty or filled
     std::string ToString(Tile const &t, Axis ax);
 
+    // all 27 tiles in the game existing in the game
     static constexpr std::array<Tile, 27> allPossibleTiles{ 
         Tile{1, 2, 3}, 
         {1, 2, 4},

@@ -26,6 +26,7 @@ public:
 
     friend std::ostream & operator<<(std::ostream & strm, Board const & board)
     {
+        // drawing the board as ascii art with the chosen tiles filled in or empty
         strm << "         ___\n";
         strm << "     ___/ " << ToString(board.tiles[2][0], Axis::x) <<  " \\___\n";
         strm << " ___/ " << ToString(board.tiles[1][0], Axis::x) << " \\" << ToString(board.tiles[2][0], Axis::y) << "_" << ToString(board.tiles[2][0], Axis::z) << "/ " << ToString(board.tiles[3][0], Axis::x) << " \\___\n";
@@ -41,6 +42,7 @@ public:
     }
 
 private:
+    // there are 5 columns with different length (3, 4, 5, 4, 3)
     using ColumnT = std::vector<Tile>;
     std::array<ColumnT, 5> tiles;
 };
