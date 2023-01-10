@@ -1,18 +1,48 @@
 #include "Board.h"
 #include "RemainingTiles.h"
+#include "Tile.h"
 
-#include <algorithm>
-#include <array>
-#include <cassert>
-#include <cstdio>
 #include <iostream>
-#include <iterator>
-#include <ostream>
-#include <random>
-#include <string>
-#include <vector>
+#include <memory>
 
 using namespace OptiTake;
+
+class Player
+{
+public:
+    virtual ~Player() = default;
+    
+    virtual void SetChosenTile(Tile const &) = 0;
+    virtual BoardPosition GetPosition() const = 0;
+};
+
+
+class CommandLinePlayer : public Player
+{
+public:
+    void SetChosenTile(Tile const & chosenTile) override
+    {
+        std::cout << "The chosen tile is:\n" << chosenTile << "\n";
+    }
+
+    BoardPosition GetPosition() const override
+    {
+        std::cout << "Please insert a position (format: column row): ";
+        int colIndex = 0;
+        int posInCol = 0;
+        std::cin >> colIndex >> posInCol;
+        // The input should be 1 based for easier understanding. The colIndex and posInCol are 0 based.
+        return {colIndex-1, posInCol-1};
+    }
+};
+
+
+class ComputerPlayer : public Player
+{
+
+};
+
+
 
 int main()
 {
@@ -20,6 +50,8 @@ int main()
     RemainingTiles remainingTiles{};
     Board board{};
     
+    std::unique_ptr<Player> player = std::make_unique<CommandLinePlayer>();
+
     // The board has 19 positions for tiles.
     for (int i = 0; i < 19; ++i){
         // The game as a total of 27 tiles.
@@ -27,16 +59,11 @@ int main()
         // The tile is presented and the position is chosen by the user. 
         std::cout << "The current board is:\n" << board << "\n";
         Tile chosenTile = remainingTiles.drawRandomTile();
-        std::cout << "The chosen tile is:\n" << chosenTile << "\n";
+        player->SetChosenTile(chosenTile);
         
         bool success = false;
         while (!success) {
-            std::cout << "Please insert a position (format: column row): ";
-            int colIndex = 0;
-            int posInCol = 0;
-            std::cin >> colIndex >> posInCol;
-            // The input should be 1 based for easier understanding. The colIndex and posInCol are 0 based.
-            success = board.SetTileToPosition(chosenTile, {colIndex-1, posInCol-1});
+            success = board.SetTileToPosition(chosenTile, player->GetPosition());
             if(!success) {
                 std::cout << "This is not a valid, free position. Try again!\n";
             }
