@@ -31,13 +31,14 @@ namespace OptiTake
 
     BoardPosition ComputerPlayer::GetPosition() const
     {
-        // each position has the same probability to be drawn
-        int numPositions = 5;
-        std::uniform_int_distribution<> distrib(1, numPositions);
+        // each position has the same probability to be drawn,
+        int numPositions = allPossiblePositions.size() - 1;
+        std::uniform_int_distribution<> distrib(0, numPositions);
 
         // draw a random number between 0 and the number of available tiles 
-        int colIndex = distrib(gen_pos);
-        int posInCol = distrib(gen_pos);
+        int positionIndex = distrib(genPos);
+        int colIndex = allPossiblePositions[positionIndex].colIndex;
+        int posInCol = allPossiblePositions[positionIndex].posInCol;
 
         std::cout << "The chosen position is: " << colIndex << ", " << posInCol << "\n";
 

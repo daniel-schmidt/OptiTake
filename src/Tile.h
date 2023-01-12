@@ -25,7 +25,7 @@ namespace OptiTake
     // to draw the tiles on the board, either empty or filled
     std::string ToString(Tile const &t, Axis ax);
 
-    // all 27 tiles in the game existing in the game
+    // all 27 tiles existing in the game
     static constexpr std::array<Tile, 27> allPossibleTiles{ 
         Tile{1, 2, 3}, 
         {1, 2, 4},
