@@ -1,47 +1,12 @@
 #include "Board.h"
 #include "RemainingTiles.h"
 #include "Tile.h"
+#include "Player.h"
 
 #include <iostream>
 #include <memory>
 
 using namespace OptiTake;
-
-class Player
-{
-public:
-    virtual ~Player() = default;
-    
-    virtual void SetChosenTile(Tile const &) = 0;
-    virtual BoardPosition GetPosition() const = 0;
-};
-
-
-class CommandLinePlayer : public Player
-{
-public:
-    void SetChosenTile(Tile const & chosenTile) override
-    {
-        std::cout << "The chosen tile is:\n" << chosenTile << "\n";
-    }
-
-    BoardPosition GetPosition() const override
-    {
-        std::cout << "Please insert a position (format: column row): ";
-        int colIndex = 0;
-        int posInCol = 0;
-        std::cin >> colIndex >> posInCol;
-        // The input should be 1 based for easier understanding. The colIndex and posInCol are 0 based.
-        return {colIndex-1, posInCol-1};
-    }
-};
-
-
-class ComputerPlayer : public Player
-{
-
-};
-
 
 
 int main()
@@ -50,7 +15,7 @@ int main()
     RemainingTiles remainingTiles{};
     Board board{};
     
-    std::unique_ptr<Player> player = std::make_unique<CommandLinePlayer>();
+    std::unique_ptr<Player> player = std::make_unique<ComputerPlayer>();
 
     // The board has 19 positions for tiles.
     for (int i = 0; i < 19; ++i){
