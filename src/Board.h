@@ -4,7 +4,6 @@
 #include <array>
 #include <ostream>
 #include <vector>
-#include <optional>
 
 namespace OptiTake
 {
@@ -20,6 +19,13 @@ class Board
 {
 public: 
     Board();
+    /**
+     * @brief Adds a new tile to the board at the given position.
+     *
+     * @param newTile the new tile to set on the board
+     * @param pos the position where to put the tile
+     * @returns true if the tile could be set, false if the position was invalid or alread occupied.
+     */
     [[nodiscard]] bool SetTileToPosition(Tile const &newTile, BoardPosition pos);
 
     [[nodiscard]] int GetScore() const;

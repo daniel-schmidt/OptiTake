@@ -10,7 +10,7 @@ namespace OptiTake
         std::cout << "The chosen tile is:\n" << chosenTile << "\n";
     }
 
-    BoardPosition CommandLinePlayer::GetPosition() const
+    BoardPosition CommandLinePlayer::SelectPosition()
     {
         std::cout << "Please insert a position (format: column row): ";
         int colIndex = 0;
@@ -29,17 +29,15 @@ namespace OptiTake
         std::this_thread::sleep_for(timespan);
     }
 
-    BoardPosition ComputerPlayer::GetPosition() const
+    BoardPosition ComputerPlayer::SelectPosition()
     {
         // each position has the same probability to be drawn,
         int numPositions = allPossiblePositions.size() - 1;
         std::uniform_int_distribution<> distrib(0, numPositions);
 
         // draw a random number between 0 and the number of available tiles 
-        int positionIndex = distrib(genPos);
-        int colIndex = allPossiblePositions[positionIndex].colIndex;
-        int posInCol = allPossiblePositions[positionIndex].posInCol;
-
+        int const positionIndex = distrib(genPos);
+        auto const [colIndex, posInCol] = allPossiblePositions[positionIndex];
         std::cout << "The chosen position is: " << colIndex << ", " << posInCol << "\n";
 
         // The input should be 1 based for easier understanding. The colIndex and posInCol are 0 based.

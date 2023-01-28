@@ -28,7 +28,7 @@ int main()
         
         bool success = false;
         while (!success) {
-            success = board.SetTileToPosition(chosenTile, player->GetPosition());
+            success = board.SetTileToPosition(chosenTile, player->SelectPosition());
             if(!success) {
                 std::cout << "This is not a valid, free position. Try again!\n";
             }

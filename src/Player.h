@@ -1,12 +1,12 @@
 #pragma once
 #include "Board.h"
-#include "Tile.h"
 
 #include <iostream>
 #include <random>
 
 namespace OptiTake
 {
+    struct Tile;
 
     class Player
     {
@@ -14,7 +14,7 @@ namespace OptiTake
         virtual ~Player() = default;
         
         virtual void SetChosenTile(Tile const &) = 0;
-        virtual BoardPosition GetPosition() const = 0;
+        virtual BoardPosition SelectPosition() = 0;
     };
 
 
@@ -23,7 +23,7 @@ namespace OptiTake
     public:
         void SetChosenTile(Tile const & chosenTile) override;
 
-        BoardPosition GetPosition() const override;
+        BoardPosition SelectPosition() override;
     };
 
 
@@ -32,12 +32,12 @@ namespace OptiTake
     public:
         void SetChosenTile(Tile const & chosenTile) override;
 
-        BoardPosition GetPosition() const override;
+        BoardPosition SelectPosition() override;
     
     private:
         // to draw a random position for column
         std::random_device rdPos;
-        std::default_random_engine mutable genPos{rdPos()};
+        std::default_random_engine genPos{rdPos()};
 
         // all 19 boardPositions existing in the game
         static constexpr std::array<BoardPosition, 19> allPossiblePositions{ 
