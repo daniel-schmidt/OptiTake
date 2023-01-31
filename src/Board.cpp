@@ -12,15 +12,7 @@ namespace OptiTake
             return [=](int coord){ return coord == expected;};
         }
 
-        /*
-        * The points are calculated for each direction. 
-        * The tile axis x represents columns.
-        * The tile axis y represents diagonals going up.
-        * The tile axis z represents diagonals going down.
-        * Points are only given, when all numbers per column/diagonal are equal.
-        * The points given are the number in that column/diagonal multiplied by number of tiles.
-        */
-        int CalculateValueX(int sum, std::vector<Tile> const & col)
+                int CalculateValueX(int sum, std::vector<Tile> const & col)
         {
             if(!col[0].empty() && std::ranges::all_of(col, IsEqualTo(col[0].x), &Tile::x)) {
                 return sum + col.size() * col[0].x;   
@@ -95,7 +87,7 @@ namespace OptiTake
         // for axis y
         std::array<ColumnT, 5> transposedRight = { 
             ColumnT{ tiles[0][0], tiles[1][0], tiles[2][0] },
-            ColumnT{ tiles[0][1], tiles[1][1], tiles[2][1], tiles[3][1]},
+            ColumnT{ tiles[0][1], tiles[1][1], tiles[2][1], tiles[3][0]},
             ColumnT{ tiles[0][2], tiles[1][2], tiles[2][2], tiles[3][1], tiles[4][0] },
             ColumnT{              tiles[1][3], tiles[2][3], tiles[3][2], tiles[4][1] },
             ColumnT{                           tiles[2][4], tiles[3][3], tiles[4][2] }
