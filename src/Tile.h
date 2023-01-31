@@ -5,6 +5,11 @@
 
 namespace OptiTake
 {
+    /**
+     * The tile axis x represents columns.
+     * The tile axis y represents diagonals going up.
+     * The tile axis z represents diagonals going down.
+     */
     struct Tile
     {
         int x = -1;

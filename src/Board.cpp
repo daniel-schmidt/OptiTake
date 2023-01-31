@@ -12,7 +12,7 @@ namespace OptiTake
             return [=](int coord){ return coord == expected;};
         }
 
-                int CalculateValueX(int sum, std::vector<Tile> const & col)
+        int CalculateValueX(int sum, std::vector<Tile> const & col)
         {
             if(!col[0].empty() && std::ranges::all_of(col, IsEqualTo(col[0].x), &Tile::x)) {
                 return sum + col.size() * col[0].x;   
@@ -36,6 +36,15 @@ namespace OptiTake
             return sum;
         }
 
+        bool IsValidColumn(int index){
+            if(index < 0 || index > 4) {
+                return false;
+            }
+            else
+                return true;
+        }
+
+        
     }
 
     Board::Board() 
@@ -52,9 +61,7 @@ namespace OptiTake
     bool Board::SetTileToPosition(Tile const &newTile, BoardPosition pos)
     {
         // check if column index exists
-        if(pos.colIndex < 0 || pos.colIndex > 4) {
-            return false;
-        }
+        IsValidColumn(pos.colIndex);
 
         // check if row in this column exists
         auto & currentCol = tiles[pos.colIndex];

@@ -28,6 +28,13 @@ public:
      */
     [[nodiscard]] bool SetTileToPosition(Tile const &newTile, BoardPosition pos);
 
+    /**
+     * @brief The points are calculated for each direction. 
+     * Points are only given, when all numbers per column/diagonal are equal.
+     * The points given are the number in that column/diagonal multiplied by number of tiles.
+     *
+     * @returns score
+     */
     [[nodiscard]] int GetScore() const;
 
     friend std::ostream & operator<<(std::ostream & strm, Board const & board)
