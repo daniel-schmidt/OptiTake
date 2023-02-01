@@ -1,5 +1,6 @@
 #include "Board.h"
 #include <algorithm>
+#include <cstddef>
 #include <numeric>
 #include <optional>
 
@@ -37,14 +38,16 @@ namespace OptiTake
         }
 
         bool IsValidColumn(int index){
-            if(index < 0 || index > 4) {
-                return false;
-            }
-            else
-                return true;
+            return (index >= 0 && index <= 4);
         }
 
-        
+        bool IsValidPosInCol(int posInCol, size_t currentColSize){
+            return (posInCol >= 0 && posInCol <= currentColSize -1);
+        }
+
+        bool IsFreePosition(OptiTake::Tile & tileAtPos){
+            return (tileAtPos.empty());
+        }
     }
 
     Board::Board() 
@@ -60,18 +63,17 @@ namespace OptiTake
 
     bool Board::SetTileToPosition(Tile const &newTile, BoardPosition pos)
     {
-        // check if column index exists
-        IsValidColumn(pos.colIndex);
-
-        // check if row in this column exists
-        auto & currentCol = tiles[pos.colIndex];
-        if(pos.posInCol < 0 || pos.posInCol > currentCol.size() -1 ) {
+        if (!IsValidColumn(pos.colIndex)){
             return false;
         }
 
-        // check if the position is already filled
+        auto & currentCol = tiles[pos.colIndex];
+        if (!IsValidPosInCol(pos.posInCol, currentCol.size())){
+            return false;
+        }
+
         auto & tileAtPos = currentCol[pos.posInCol];
-        if(!tileAtPos.empty()) {
+        if (!IsFreePosition(tileAtPos)){
             return false;
         }
 
