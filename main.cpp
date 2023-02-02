@@ -14,8 +14,12 @@ int main()
     std::cout << "This is the game Take it Easy!\n";
     RemainingTiles remainingTiles{};
     
+    std::string playerName;
+    std::cout << "Enter a name: ";
+    std::cin >> playerName;
+    
     std::vector<std::pair<std::unique_ptr<Player>, Board>> playersWithBoard;
-    playersWithBoard.emplace_back(std::make_unique<CommandLinePlayer>(), Board{});
+    playersWithBoard.emplace_back(std::make_unique<CommandLinePlayer>(playerName), Board{});
     playersWithBoard.emplace_back(std::make_unique<ComputerPlayer>(), Board{});
 
     
@@ -26,7 +30,7 @@ int main()
         // The tile is presented and the position is chosen by the user. 
         Tile chosenTile = remainingTiles.drawRandomTile();
         for(auto & [player, board] : playersWithBoard) {
-            std::cout << "The current board is:\n" << board << "\n";
+            std::cout << "The current board of " << player->getName() << " is:\n" << board << "\n";
             player->SetChosenTile(chosenTile);
             bool success = false;
             while (!success) {
@@ -41,7 +45,7 @@ int main()
     }
 
     for(auto & [player, board] : playersWithBoard) {
-        std::cout << "The final board is:\n" << board << "\n";
-        std::cout << "Game over! You finished with a final score of " << board.GetScore() << ".\n";
+        std::cout << "The final board of " << player->getName() << " is:\n" << board << "\n";
+        std::cout << "Game over! " << player->getName() << " finished with a final score of " << board.GetScore() << ".\n";
     }
 }

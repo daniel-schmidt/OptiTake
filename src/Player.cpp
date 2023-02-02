@@ -5,6 +5,12 @@
 
 namespace OptiTake
 {
+    std::string Player::getName() const
+    {
+        return name;
+    }
+
+
     void CommandLinePlayer::SetChosenTile(Tile const & chosenTile)
     {
         std::cout << "The chosen tile is:\n" << chosenTile << "\n";

@@ -11,25 +11,43 @@ namespace OptiTake
     class Player
     {
     public:
+        Player(std::string playerName) : name {playerName}
+        {
+        }
+
         virtual ~Player() = default;
         
         virtual void SetChosenTile(Tile const &) = 0;
         virtual BoardPosition SelectPosition() = 0;
+        std::string getName() const;
+
+    private:
+        std::string name;
     };
 
 
     class CommandLinePlayer : public Player
     {
     public:
+        CommandLinePlayer(std::string playerName)
+        : Player{playerName}
+        {} 
+            
+        
         void SetChosenTile(Tile const & chosenTile) override;
 
         BoardPosition SelectPosition() override;
+
     };
 
 
     class ComputerPlayer : public Player
     {
     public:
+        ComputerPlayer(std::string computerName = "Computer Player")
+        : Player{computerName}
+        {} 
+
         void SetChosenTile(Tile const & chosenTile) override;
 
         BoardPosition SelectPosition() override;
