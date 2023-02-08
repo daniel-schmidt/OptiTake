@@ -44,8 +44,8 @@ namespace OptiTake
     class ComputerPlayer : public Player
     {
     public:
-        ComputerPlayer(std::string computerName = "Computer Player")
-        : Player{computerName}
+        ComputerPlayer()
+        : Player{"Computer Player"}
         {} 
 
         void SetChosenTile(Tile const & chosenTile) override;
