@@ -38,15 +38,15 @@ namespace OptiTake
         }
 
         bool IsValidColumn(int index){
-            return (index >= 0 && index <= 4);
+            return index >= 0 && index <= 4;
         }
 
-        bool IsValidPosInCol(int posInCol, size_t currentColSize){
-            return (posInCol >= 0 && posInCol <= currentColSize -1);
+        bool IsValidPosInCol(int posInCol, ptrdiff_t currentColSize){
+            return posInCol >= 0 && posInCol <= currentColSize -1;
         }
 
         bool IsFreePosition(OptiTake::Tile & tileAtPos){
-            return (tileAtPos.empty());
+            return tileAtPos.empty();
         }
     }
 
@@ -68,7 +68,7 @@ namespace OptiTake
         }
 
         auto & currentCol = tiles[pos.colIndex];
-        if (!IsValidPosInCol(pos.posInCol, currentCol.size())){
+        if (!IsValidPosInCol(pos.posInCol, std::ssize(currentCol))){
             return false;
         }
 
