@@ -24,10 +24,9 @@ int main()
         std::string playerName;
         std::cout << "Enter a name: ";
         std::cin >> playerName;
-        playersWithBoard.emplace_back(std::make_unique<CommandLinePlayer>(playerName), Board{});
+        playersWithBoard.emplace_back(std::make_unique<CommandLinePlayer>(std::move(playerName)), Board{});
     }
     playersWithBoard.emplace_back(std::make_unique<ComputerPlayer>(), Board{});
-
     
     int constexpr numBoardPositions = 19;
     for (int i = 0; i < numBoardPositions; ++i){
@@ -48,8 +47,6 @@ int main()
                     std::cout << "This is not a valid, free position. Try again!\n";
                 }
             }
-
-            //std::cout << "Current score: " << board.GetScore() << "\n";
         }
     }
 
@@ -62,9 +59,8 @@ int main()
                   << board.GetScore() << " with the board: \n" << board << "\n";
     }
 
-    std::vector<int>::iterator bestPlayer;
-    bestPlayer = std::max_element(finalScores.begin(), finalScores.end());
+    std::vector<int>::const_iterator bestPlayer = std::max_element(finalScores.begin(), finalScores.end());
     std::cout << "***The player "
-              << playersWithBoard.at(std::distance(finalScores.begin(), bestPlayer)).first->getName()
+              << playersWithBoard.at(std::distance(finalScores.cbegin(), bestPlayer)).first->getName()
               << " wins with the score of " << *bestPlayer << "!***\n";
 }

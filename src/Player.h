@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <random>
+#include <string>
 
 namespace OptiTake
 {
@@ -11,48 +12,40 @@ namespace OptiTake
     class Player
     {
     public:
-        Player(std::string playerName) : name {playerName}
-        {
-        }
-
         virtual ~Player() = default;
         
         virtual void SetChosenTile(Tile const &) = 0;
         virtual BoardPosition SelectPosition() = 0;
-        std::string getName() const;
-
-    private:
-        std::string name;
+        virtual std::string getName() const = 0;
     };
 
 
     class CommandLinePlayer : public Player
     {
     public:
-        CommandLinePlayer(std::string playerName)
-        : Player{playerName}
-        {} 
-            
-        
-        void SetChosenTile(Tile const & chosenTile) override;
+      CommandLinePlayer(std::string playerName);
 
-        BoardPosition SelectPosition() override;
+      void SetChosenTile(Tile const &chosenTile) override;
 
+      BoardPosition SelectPosition() override;
+
+      std::string getName() const override;
+
+    private:
+      std::string name;
     };
 
 
     class ComputerPlayer : public Player
     {
     public:
-        ComputerPlayer()
-        : Player{"Computer Player"}
-        {} 
-
         void SetChosenTile(Tile const & chosenTile) override;
 
         BoardPosition SelectPosition() override;
-    
-    private:
+
+        std::string getName() const override;
+
+      private:
         // to draw a random position for column
         std::random_device rdPos;
         std::default_random_engine genPos{rdPos()};

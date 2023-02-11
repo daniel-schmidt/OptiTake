@@ -4,12 +4,12 @@
 #include <thread>
 
 namespace OptiTake
-{
-    std::string Player::getName() const
-    {
-        return name;
-    }
+{    
+    CommandLinePlayer::CommandLinePlayer(std::string playerName)
+        : name{playerName} 
+        {
 
+        }
 
     void CommandLinePlayer::SetChosenTile(Tile const & chosenTile)
     {
@@ -24,6 +24,11 @@ namespace OptiTake
         std::cin >> colIndex >> posInCol;
         // The input should be 1 based for easier understanding. The colIndex and posInCol are 0 based.
         return {colIndex-1, posInCol-1};
+    }
+    
+    std::string CommandLinePlayer::getName() const 
+    { 
+        return name; 
     }
 
 
@@ -49,4 +54,10 @@ namespace OptiTake
         // The input should be 1 based for easier understanding. The colIndex and posInCol are 0 based.
         return {colIndex-1, posInCol-1};
     }
-}
+
+    std::string ComputerPlayer::getName() const 
+    { 
+        return "Computer Player"; 
+    }
+
+    } // namespace OptiTake
