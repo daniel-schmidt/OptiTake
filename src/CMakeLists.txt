@@ -5,8 +5,8 @@ add_library(LibOptiTake
     Player.cpp
 )
 
-target_compile_features(LibOptiTake PRIVATE cxx_std_20)
-target_compile_options(LibOptiTake PRIVATE -Wall -pedantic)
+target_compile_features(LibOptiTake PUBLIC cxx_std_20)
+target_compile_options(LibOptiTake PUBLIC -Wall -pedantic)
 
 
 target_include_directories(LibOptiTake PRIVATE .)
