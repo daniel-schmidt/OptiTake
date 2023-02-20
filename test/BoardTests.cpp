@@ -4,38 +4,38 @@
 
 namespace OptiTake
 {
-
-TEST(BoardTests, SetPosition_OutsideBoardColumnTooHigh_PositionIsInvalid)
+class BoardTests:public::testing::Test
 {
+protected:
     Board under_test{};
+};
+
+TEST_F(BoardTests, SetPosition_OutsideBoardColumnTooHigh_PositionIsInvalid)
+{
     bool success = under_test.SetTileToPosition({1, 2, 3}, {6, 1});
     EXPECT_FALSE(success);
 }
 
-TEST(BoardTests, SetPosition_OutsideBoardColumnTooLow_PositionIsInvalid)
+TEST_F(BoardTests, SetPosition_OutsideBoardColumnTooLow_PositionIsInvalid)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {-1, 1});
     EXPECT_FALSE(success);
 }
 
-TEST(BoardTests, SetPosition_OutsideBoardPosInColTooHigh_PositionIsInvalid)
+TEST_F(BoardTests, SetPosition_OutsideBoardPosInColTooHigh_PositionIsInvalid)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {1, 5});
     EXPECT_FALSE(success);
 }
 
-TEST(BoardTests, SetPosition_OutsideBoardPosInColTooLow_PositionIsInvalid)
+TEST_F(BoardTests, SetPosition_OutsideBoardPosInColTooLow_PositionIsInvalid)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {1, -1});
     EXPECT_FALSE(success);
 }
 
-TEST(BoardTests, SetPosition_PosAlreadyTaken_PositionIsInvalid)
+TEST_F(BoardTests, SetPosition_PosAlreadyTaken_PositionIsInvalid)
 {
-    Board under_test{};
     bool success1 = under_test.SetTileToPosition({1, 2, 3}, {1, 1});
     ASSERT_TRUE(success1);
 
@@ -47,16 +47,14 @@ TEST(BoardTests, SetPosition_PosAlreadyTaken_PositionIsInvalid)
 
 
 
-TEST(BoardTests, GetScore_WhenBoardIsEmpty_ScoreIsZero)
+TEST_F(BoardTests, GetScore_WhenBoardIsEmpty_ScoreIsZero)
 {
-    Board under_test{};
     auto const result = under_test.GetScore();
     EXPECT_EQ(result, 0);
 }
 
-TEST(BoardTests, GetScore_WhenBoardHasSingleTile_ScoreIsZero)
+TEST_F(BoardTests, GetScore_WhenBoardHasSingleTile_ScoreIsZero)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {1, 1});
     ASSERT_TRUE(success);
 
@@ -68,9 +66,8 @@ TEST(BoardTests, GetScore_WhenBoardHasSingleTile_ScoreIsZero)
 
 
 
-TEST(BoardTests, GetScore_WhenX0IsFilled_ScoreIsThree)
+TEST_F(BoardTests, GetScore_WhenX0IsFilled_ScoreIsThree)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {0, 0});
     ASSERT_TRUE(success);
     success = under_test.SetTileToPosition({1, 2, 4}, {0, 1});
@@ -82,9 +79,8 @@ TEST(BoardTests, GetScore_WhenX0IsFilled_ScoreIsThree)
     EXPECT_EQ(result, 3);
 }
 
-TEST(BoardTests, GetScore_WhenX1IsFilled_ScoreIsFour)
+TEST_F(BoardTests, GetScore_WhenX1IsFilled_ScoreIsFour)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {1, 0});
     ASSERT_TRUE(success);
     success = under_test.SetTileToPosition({1, 2, 4}, {1, 1});
@@ -98,9 +94,8 @@ TEST(BoardTests, GetScore_WhenX1IsFilled_ScoreIsFour)
     EXPECT_EQ(result, 4);
 }
 
-TEST(BoardTests, GetScore_WhenX2IsFilled_ScoreIsFive)
+TEST_F(BoardTests, GetScore_WhenX2IsFilled_ScoreIsFive)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {2, 0});
     ASSERT_TRUE(success);
     success = under_test.SetTileToPosition({1, 2, 4}, {2, 1});
@@ -116,9 +111,8 @@ TEST(BoardTests, GetScore_WhenX2IsFilled_ScoreIsFive)
     EXPECT_EQ(result, 5);
 }
 
-TEST(BoardTests, GetScore_WhenX3IsFilled_ScoreIsFour)
+TEST_F(BoardTests, GetScore_WhenX3IsFilled_ScoreIsFour)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {3, 0});
     ASSERT_TRUE(success);
     success = under_test.SetTileToPosition({1, 2, 4}, {3, 1});
@@ -132,9 +126,8 @@ TEST(BoardTests, GetScore_WhenX3IsFilled_ScoreIsFour)
     EXPECT_EQ(result, 4);
 }
 
-TEST(BoardTests, GetScore_WhenX4IsFilled_ScoreIsThree)
+TEST_F(BoardTests, GetScore_WhenX4IsFilled_ScoreIsThree)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {4, 0});
     ASSERT_TRUE(success);
     success = under_test.SetTileToPosition({1, 2, 4}, {4, 1});
@@ -150,9 +143,8 @@ TEST(BoardTests, GetScore_WhenX4IsFilled_ScoreIsThree)
 
 
 
-TEST(BoardTests, GetScore_WhenY0IsFilled_ScoreIsSix)
+TEST_F(BoardTests, GetScore_WhenY0IsFilled_ScoreIsSix)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {0, 0});
     ASSERT_TRUE(success);
     success = under_test.SetTileToPosition({1, 2, 4}, {1, 0});
@@ -164,9 +156,8 @@ TEST(BoardTests, GetScore_WhenY0IsFilled_ScoreIsSix)
     EXPECT_EQ(result, 6);
 }
 
-TEST(BoardTests, GetScore_WhenY1IsFilled_ScoreIsEight)
+TEST_F(BoardTests, GetScore_WhenY1IsFilled_ScoreIsEight)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {0, 1});
     ASSERT_TRUE(success);
     success = under_test.SetTileToPosition({1, 2, 4}, {1, 1});
@@ -180,9 +171,8 @@ TEST(BoardTests, GetScore_WhenY1IsFilled_ScoreIsEight)
     EXPECT_EQ(result, 8);
 }
 
-TEST(BoardTests, GetScore_WhenY2IsFilled_ScoreIsTen)
+TEST_F(BoardTests, GetScore_WhenY2IsFilled_ScoreIsTen)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {0, 2});
     ASSERT_TRUE(success);
     success = under_test.SetTileToPosition({1, 2, 4}, {1, 2});
@@ -198,9 +188,8 @@ TEST(BoardTests, GetScore_WhenY2IsFilled_ScoreIsTen)
     EXPECT_EQ(result, 10);
 }
 
-TEST(BoardTests, GetScore_WhenY3IsFilled_ScoreIsEight)
+TEST_F(BoardTests, GetScore_WhenY3IsFilled_ScoreIsEight)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {1, 3});
     ASSERT_TRUE(success);
     success = under_test.SetTileToPosition({1, 2, 4}, {2, 3});
@@ -214,9 +203,8 @@ TEST(BoardTests, GetScore_WhenY3IsFilled_ScoreIsEight)
     EXPECT_EQ(result, 8);
 }
 
-TEST(BoardTests, GetScore_WhenY4IsFilled_ScoreIsSix)
+TEST_F(BoardTests, GetScore_WhenY4IsFilled_ScoreIsSix)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {2, 4});
     ASSERT_TRUE(success);
     success = under_test.SetTileToPosition({1, 2, 4}, {3, 3});
@@ -231,9 +219,8 @@ TEST(BoardTests, GetScore_WhenY4IsFilled_ScoreIsSix)
 
 
 
-TEST(BoardTests, GetScore_WhenZ0IsFilled_ScoreIsNine)
+TEST_F(BoardTests, GetScore_WhenZ0IsFilled_ScoreIsNine)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {0, 2});
     ASSERT_TRUE(success);
     success = under_test.SetTileToPosition({1, 6, 3}, {1, 3});
@@ -245,9 +232,8 @@ TEST(BoardTests, GetScore_WhenZ0IsFilled_ScoreIsNine)
     EXPECT_EQ(result, 9);
 }
 
-TEST(BoardTests, GetScore_WhenZ1IsFilled_ScoreIsTwelfe)
+TEST_F(BoardTests, GetScore_WhenZ1IsFilled_ScoreIsTwelfe)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {0, 1});
     ASSERT_TRUE(success);
     success = under_test.SetTileToPosition({1, 6, 3}, {1, 2});
@@ -261,9 +247,8 @@ TEST(BoardTests, GetScore_WhenZ1IsFilled_ScoreIsTwelfe)
     EXPECT_EQ(result, 12);
 }
 
-TEST(BoardTests, GetScore_WhenZ2IsFilled_ScoreIsFifteen)
+TEST_F(BoardTests, GetScore_WhenZ2IsFilled_ScoreIsFifteen)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {0, 0});
     ASSERT_TRUE(success);
     success = under_test.SetTileToPosition({1, 6, 3}, {1, 1});
@@ -279,9 +264,8 @@ TEST(BoardTests, GetScore_WhenZ2IsFilled_ScoreIsFifteen)
     EXPECT_EQ(result, 15);
 }
 
-TEST(BoardTests, GetScore_WhenZ3IsFilled_ScoreIsTwelfe)
+TEST_F(BoardTests, GetScore_WhenZ3IsFilled_ScoreIsTwelfe)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {1, 0});
     ASSERT_TRUE(success);
     success = under_test.SetTileToPosition({1, 6, 3}, {2, 1});
@@ -295,9 +279,8 @@ TEST(BoardTests, GetScore_WhenZ3IsFilled_ScoreIsTwelfe)
     EXPECT_EQ(result, 12);
 }
 
-TEST(BoardTests, GetScore_WhenZ4IsFilled_ScoreIsNine)
+TEST_F(BoardTests, GetScore_WhenZ4IsFilled_ScoreIsNine)
 {
-    Board under_test{};
     bool success = under_test.SetTileToPosition({1, 2, 3}, {2, 0});
     ASSERT_TRUE(success);
     success = under_test.SetTileToPosition({1, 6, 3}, {3, 0});
