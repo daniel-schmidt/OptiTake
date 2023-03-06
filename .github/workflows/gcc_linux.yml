@@ -22,6 +22,6 @@ jobs:
     - name: Build
       run: |
         cmake -S . -B build -GNinja
-        ninja
+        cmake --build build
     - name: Test
       run: ctest --test-dir build
