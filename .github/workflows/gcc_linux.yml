@@ -9,12 +9,16 @@ jobs:
     name: build
     strategy:
       fail-fast: false
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     timeout-minutes: 10
 
     steps:
     - uses: actions/checkout@v3
-    - uses: lukka/get-cmake@latest
+    - uses: lukka/get-cmake@latest 
+    - uses: egor-tensin/setup-gcc@v1
+      with:
+        version: 12
+        platform: x64
     - name: Build
       run: |
         mkdir build && cd build
