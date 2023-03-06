@@ -21,8 +21,7 @@ jobs:
         platform: x64
     - name: Build
       run: |
-        mkdir build && cd build
-        cmake -GNinja ..
+        cmake -S . -B build -GNinja
         ninja
     - name: Test
-      run: cd build && ctest
+      run: ctest --test-dir build
