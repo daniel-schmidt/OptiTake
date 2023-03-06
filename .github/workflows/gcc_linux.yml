@@ -1,4 +1,4 @@
-name: build
+name: Build and Test
 on:
   push:
   pull_request:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   all:
-    name: build
+    name: Build and Test
     strategy:
       fail-fast: false
     runs-on: ubuntu-22.04
@@ -24,3 +24,5 @@ jobs:
         mkdir build && cd build
         cmake -GNinja ..
         ninja
+    - name: Test
+      run: ctest
