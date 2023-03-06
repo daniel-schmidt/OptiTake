@@ -25,4 +25,4 @@ jobs:
         cmake -GNinja ..
         ninja
     - name: Test
-      run: ctest
+      run: cd build && ctest
