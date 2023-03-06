@@ -1,0 +1,22 @@
+name: build
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  all:
+    name: build
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-20.04
+    timeout-minutes: 10
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: lukka/get-cmake@latest
+    - name: Build
+      run: |
+        mkdir build && cd build
+        cmake -GNinja ..
+        ninja
