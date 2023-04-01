@@ -292,4 +292,12 @@ TEST_F(BoardTests, GetScore_WhenZ4IsFilled_ScoreIsNine)
     EXPECT_EQ(result, 9);
 }
 
+
+TEST_F(BoardTests, GetScore_OfOptimalBoard_ScoreIs307)
+{
+    under_test = optimal_board;
+    auto const result = under_test.GetScore();
+    EXPECT_EQ(result, 307);
+}
+
 }

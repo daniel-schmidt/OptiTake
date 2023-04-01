@@ -19,6 +19,8 @@ class Board
 {
 public: 
     Board();
+    Board(std::array<Tile, 19> const & tilesPerRow);
+
     /**
      * @brief Adds a new tile to the board at the given position.
      *
@@ -59,5 +61,14 @@ private:
     using ColumnT = std::vector<Tile>;
     std::array<ColumnT, 5> tiles;
 };
+
+
+inline static Board optimal_board{std::array<Tile, 19>{Tile
+        {5,6,3}, {5,6,4}, {5,2,8},
+        {9,6,8}, {9,6,3}, {9,2,4}, {9,7,8},
+        {1,6,4}, {1,6,8}, {1,2,3}, {1,7,4}, {1,7,8},
+        {9,6,4}, {9,2,8}, {9,7,3}, {9,7,4}, 
+        {5,2,4}, {5,7,8}, {5,7,3}
+    }};
 
 }

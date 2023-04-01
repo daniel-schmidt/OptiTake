@@ -60,6 +60,15 @@ namespace OptiTake
         tiles[4] = {3, Tile{}};
     }
 
+    Board::Board(std::array<Tile, 19> const & tilesPerRow)
+    {
+        tiles[0].insert(tiles[0].begin(), tilesPerRow.begin(), tilesPerRow.begin()+3);
+        tiles[1].insert(tiles[1].begin(), tilesPerRow.begin()+3, tilesPerRow.begin()+7);
+        tiles[2].insert(tiles[2].begin(), tilesPerRow.begin()+7, tilesPerRow.begin()+12);
+        tiles[3].insert(tiles[3].begin(), tilesPerRow.begin()+12, tilesPerRow.begin()+16);
+        tiles[4].insert(tiles[4].begin(), tilesPerRow.begin()+16, tilesPerRow.end());
+    }
+
 
     bool Board::SetTileToPosition(Tile const &newTile, BoardPosition pos)
     {
