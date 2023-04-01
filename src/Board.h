@@ -2,6 +2,7 @@
 #include "Tile.h"
 
 #include <array>
+#include <optional>
 #include <ostream>
 #include <vector>
 
@@ -12,8 +13,11 @@ struct BoardPosition
 {
     int colIndex;
     int posInCol;
+
+    auto operator<=>(BoardPosition const &) const = default;
 };
 
+std::ostream &operator<<(std::ostream &stream, BoardPosition const &pos);
 
 class Board
 {
@@ -29,6 +33,14 @@ public:
      * @returns true if the tile could be set, false if the position was invalid or alread occupied.
      */
     [[nodiscard]] bool SetTileToPosition(Tile const &newTile, BoardPosition pos);
+
+    /**
+     * @brief Looks for the given tile in the current board.
+     *
+     * @param to_find is the Tile to find in the board.
+     * @returns the position if the board contains the tile, otherwise returns std::nullopt.
+     */
+    [[nodiscard]] std::optional<BoardPosition> Find(Tile const &to_find);
 
     /**
      * @brief The points are calculated for each direction. 

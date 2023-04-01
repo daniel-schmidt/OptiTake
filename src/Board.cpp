@@ -50,6 +50,14 @@ namespace OptiTake
         }
     }
 
+
+    std::ostream &operator<<(std::ostream &stream, BoardPosition const &pos)
+    {
+        stream << "Pos: {" << pos.colIndex << "," << pos.posInCol << "}";
+        return stream;
+    }
+
+
     Board::Board() 
     {
         // the board has 5 columns with 3, 4, 5, 4, 3 length
@@ -91,6 +99,21 @@ namespace OptiTake
     }
 
 
+    std::optional<BoardPosition> Board::Find(Tile const &to_find) 
+    {
+        int col_counter = 0;
+        for (auto const & col : tiles) {
+            auto const found_it = std::ranges::find(col, to_find);
+            if(found_it != col.end()) {
+                int row_pos = std::distance(col.begin(), found_it);
+                return BoardPosition{col_counter, row_pos};
+            }
+            col_counter++;
+        }
+        return {};
+    }
+
+
     int Board::GetScore() const 
     {        
         // for axis z
@@ -118,4 +141,5 @@ namespace OptiTake
 
         return score;
     }
-} // namespace OptiTake
+
+    } // namespace OptiTake

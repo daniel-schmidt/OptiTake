@@ -1,9 +1,11 @@
 #include "Board.h"
 
-#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
-namespace OptiTake
+namespace OptiTake 
 {
+using ::testing::Optional;
+
 class BoardTests:public::testing::Test
 {
 protected:
@@ -292,7 +294,6 @@ TEST_F(BoardTests, GetScore_WhenZ4IsFilled_ScoreIsNine)
     EXPECT_EQ(result, 9);
 }
 
-
 TEST_F(BoardTests, GetScore_OfOptimalBoard_ScoreIs307)
 {
     under_test = optimal_board;
@@ -300,4 +301,19 @@ TEST_F(BoardTests, GetScore_OfOptimalBoard_ScoreIs307)
     EXPECT_EQ(result, 307);
 }
 
+
+TEST_F(BoardTests, Find_WithPieceNotInOptimalBoard_ReturnsEmptyOptional)
+{
+    under_test = optimal_board;
+    EXPECT_EQ(under_test.Find({1,2,4}), std::nullopt);
 }
+
+TEST_F(BoardTests, Find_WithPieceOfOptimalBoard_ReturnsPosition)
+{
+    under_test = optimal_board;
+    EXPECT_THAT(under_test.Find({5,6,3}), Optional(BoardPosition{0, 0}));
+    EXPECT_THAT(under_test.Find({1,2,3}), Optional(BoardPosition{2, 2}));
+    EXPECT_THAT(under_test.Find({5,7,8}), Optional(BoardPosition{4, 1}));
+}
+
+} // namespace OptiTake
