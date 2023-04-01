@@ -1,6 +1,7 @@
 add_executable(
   Tests 
   BoardTests.cpp
+  OptimalSolutionPlayerTests.cpp
 )
 
 target_include_directories(Tests PRIVATE ../src)

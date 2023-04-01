@@ -1,8 +1,9 @@
 add_library(LibOptiTake 
     Board.cpp
+    OptimalSolutionPlayer.cpp
+    Player.cpp
     RemainingTiles.cpp
     Tile.cpp
-    Player.cpp
 )
 
 target_compile_features(LibOptiTake PUBLIC cxx_std_20)
