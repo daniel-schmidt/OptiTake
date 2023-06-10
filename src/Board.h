@@ -11,8 +11,8 @@ namespace OptiTake
 
 struct BoardPosition
 {
-    int colIndex;
-    int posInCol;
+    int colIndex; ///< 0-based column index
+    int posInCol; ///< 0-based position inside the column
 
     auto operator<=>(BoardPosition const &) const = default;
 };

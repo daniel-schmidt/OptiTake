@@ -2,6 +2,7 @@
 #include "RemainingTiles.h"
 #include "Tile.h"
 #include "Player.h"
+#include "OptimalSolutionPlayer.h"
 
 #include <iostream>
 #include <memory>
@@ -26,7 +27,8 @@ int main()
         std::cin >> playerName;
         playersWithBoard.emplace_back(std::make_unique<CommandLinePlayer>(std::move(playerName)), Board{});
     }
-    playersWithBoard.emplace_back(std::make_unique<ComputerPlayer>(), Board{});
+    auto fallback = std::make_unique<ComputerPlayer>();
+    playersWithBoard.emplace_back(std::make_unique<OptimalSolutionPlayer>(std::move(fallback)), Board{});
     
     int constexpr numBoardPositions = 19;
     for (int i = 0; i < numBoardPositions; ++i){
