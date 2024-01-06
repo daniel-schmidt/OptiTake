@@ -15,7 +15,7 @@ class OptimalSolutionPlayerTests : public ::testing::Test
 
 TEST(OptimalSolutionPlayerTests, ForTileInOptimalBoard_SelectsFreePosition)
 {
-    auto fallback = std::make_unique<ComputerPlayer>();
+    auto fallback = std::make_unique<RandomPlayer>();
     OptimalSolutionPlayer under_test{std::move(fallback)};
     under_test.SetChosenTile({1,2,3});
     BoardPosition expected{2, 2};

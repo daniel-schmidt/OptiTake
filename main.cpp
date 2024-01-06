@@ -27,7 +27,7 @@ int main()
         std::cin >> playerName;
         playersWithBoard.emplace_back(std::make_unique<CommandLinePlayer>(std::move(playerName)), Board{});
     }
-    auto fallback = std::make_unique<ComputerPlayer>();
+    auto fallback = std::make_unique<RandomPlayer>();
     playersWithBoard.emplace_back(std::make_unique<OptimalSolutionPlayer>(std::move(fallback)), Board{});
     
     int constexpr numBoardPositions = 19;

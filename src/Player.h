@@ -36,7 +36,7 @@ namespace OptiTake
     };
 
 
-    class ComputerPlayer : public Player
+    class RandomPlayer : public Player
     {
     public:
         void SetChosenTile(Tile const & chosenTile) override;

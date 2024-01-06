@@ -32,12 +32,12 @@ namespace OptiTake
     }
 
 
-    void ComputerPlayer::SetChosenTile(Tile const & chosenTile)
+    void RandomPlayer::SetChosenTile(Tile const & chosenTile)
     {
         std::cout << "The chosen tile is:\n" << chosenTile << "\n";
     }
 
-    BoardPosition ComputerPlayer::SelectPosition()
+    BoardPosition RandomPlayer::SelectPosition()
     {
         // each position has the same probability to be drawn,
         int numPositions = allPossiblePositions.size() - 1;
@@ -52,9 +52,9 @@ namespace OptiTake
         return {colIndex-1, posInCol-1};
     }
 
-    std::string ComputerPlayer::getName() const 
+    std::string RandomPlayer::getName() const 
     { 
-        return "Computer Player"; 
+        return "Random Player"; 
     }
 
     } // namespace OptiTake
