@@ -74,6 +74,27 @@ private:
     std::array<ColumnT, 5> tiles;
 };
 
+// all 19 boardPositions existing in the game
+inline static constexpr std::array<BoardPosition, 19> allPossiblePositions{ 
+        BoardPosition{1, 1}, 
+        {1, 2}, 
+        {1, 3}, 
+        {2, 1}, 
+        {2, 2}, 
+        {2, 3}, 
+        {2, 4}, 
+        {3, 1}, 
+        {3, 2}, 
+        {3, 3}, 
+        {3, 4}, 
+        {3, 5}, 
+        {4, 1}, 
+        {4, 2}, 
+        {4, 3}, 
+        {4, 4}, 
+        {5, 1},
+        {5, 2}, 
+        {5, 3}};
 
 inline static Board optimal_board{std::array<Tile, 19>{Tile
         {5,6,3}, {5,6,4}, {5,2,8},

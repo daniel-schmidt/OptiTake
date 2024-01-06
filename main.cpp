@@ -1,8 +1,9 @@
 #include "Board.h"
+#include "CommandLinePlayer.h"
+#include "OptimalSolutionPlayer.h"
+#include "RandomPlayer.h"
 #include "RemainingTiles.h"
 #include "Tile.h"
-#include "Player.h"
-#include "OptimalSolutionPlayer.h"
 
 #include <iostream>
 #include <memory>

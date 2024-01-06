@@ -1,5 +1,7 @@
 #include "OptimalSolutionPlayer.h"
 
+#include "Board.h"
+
 namespace OptiTake 
 {
 

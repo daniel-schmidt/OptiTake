@@ -1,7 +1,8 @@
 add_library(LibOptiTake 
     Board.cpp
+    CommandLinePlayer.cpp
     OptimalSolutionPlayer.cpp
-    Player.cpp
+    RandomPlayer.cpp
     RemainingTiles.cpp
     Tile.cpp
 )

@@ -1,37 +1,11 @@
-#include "Player.h"
+#include "RandomPlayer.h"
 
-#include <chrono>
-#include <thread>
+#include "Board.h"
 
-namespace OptiTake
-{    
-    CommandLinePlayer::CommandLinePlayer(std::string playerName)
-        : name{playerName} 
-        {
+#include <iostream>
 
-        }
-
-    void CommandLinePlayer::SetChosenTile(Tile const & chosenTile)
-    {
-        std::cout << "The chosen tile is:\n" << chosenTile << "\n";
-    }
-
-    BoardPosition CommandLinePlayer::SelectPosition()
-    {
-        std::cout << "Please insert a position (format: column row): ";
-        int colIndex = 0;
-        int posInCol = 0;
-        std::cin >> colIndex >> posInCol;
-        // The input should be 1 based for easier understanding. The colIndex and posInCol are 0 based.
-        return {colIndex-1, posInCol-1};
-    }
-    
-    std::string CommandLinePlayer::getName() const 
-    { 
-        return name; 
-    }
-
-
+namespace OptiTake 
+{
     void RandomPlayer::SetChosenTile(Tile const & chosenTile)
     {
         std::cout << "The chosen tile is:\n" << chosenTile << "\n";
@@ -56,5 +30,4 @@ namespace OptiTake
     { 
         return "Random Player"; 
     }
-
-    } // namespace OptiTake
+}

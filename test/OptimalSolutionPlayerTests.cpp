@@ -1,5 +1,6 @@
+#include "Board.h"
 #include "OptimalSolutionPlayer.h"
-#include "Player.h"
+#include "RandomPlayer.h"
 
 #include <gmock/gmock.h>
 #include <memory>
