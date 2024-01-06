@@ -35,9 +35,6 @@ namespace OptiTake
     void ComputerPlayer::SetChosenTile(Tile const & chosenTile)
     {
         std::cout << "The chosen tile is:\n" << chosenTile << "\n";
-
-        std::chrono::milliseconds timespan(2000);
-        std::this_thread::sleep_for(timespan);
     }
 
     BoardPosition ComputerPlayer::SelectPosition()
