@@ -16,7 +16,7 @@ namespace OptiTake
         int CalculateValueX(int sum, std::vector<Tile> const & col)
         {
             if(!col[0].empty() && std::ranges::all_of(col, IsEqualTo(col[0].x), &Tile::x)) {
-                return sum + col.size() * col[0].x;   
+                return sum + static_cast<int>(col.size()) * col[0].x;   
             }
             return sum;
         }
@@ -24,7 +24,7 @@ namespace OptiTake
         int CalculateValueY(int sum, std::vector<Tile> const & col)
         {
             if(!col[0].empty() && std::ranges::all_of(col, IsEqualTo(col[0].y), &Tile::y)) {
-                return sum + col.size() * col[0].y;   
+                return sum + static_cast<int>(col.size()) * col[0].y;   
             }
             return sum;
         }
@@ -32,7 +32,7 @@ namespace OptiTake
         int CalculateValueZ(int sum, std::vector<Tile> const & col)
         {
             if(!col[0].empty() && std::ranges::all_of(col, IsEqualTo(col[0].z), &Tile::z)) {
-                return sum + col.size() * col[0].z;   
+                return sum + static_cast<int>(col.size()) * col[0].z;   
             }
             return sum;
         }
@@ -45,7 +45,7 @@ namespace OptiTake
             return posInCol >= 0 && posInCol <= currentColSize -1;
         }
 
-        bool IsFreePosition(OptiTake::Tile & tileAtPos){
+        bool IsFreePosition(OptiTake::Tile const & tileAtPos){
             return tileAtPos.empty();
         }
     }
@@ -99,13 +99,12 @@ namespace OptiTake
     }
 
 
-    std::optional<BoardPosition> Board::Find(Tile const &to_find) 
+    std::optional<BoardPosition> Board::Find(Tile const &to_find) const
     {
         int col_counter = 0;
         for (auto const & col : tiles) {
-            auto const found_it = std::ranges::find(col, to_find);
-            if(found_it != col.end()) {
-                int row_pos = std::distance(col.begin(), found_it);
+            if(auto const found_it = std::ranges::find(col, to_find); found_it != col.end()) {
+                auto const row_pos = static_cast<int>(std::distance(col.begin(), found_it));
                 return BoardPosition{col_counter, row_pos};
             }
             col_counter++;

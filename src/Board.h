@@ -23,7 +23,7 @@ class Board
 {
 public: 
     Board();
-    Board(std::array<Tile, 19> const & tilesPerRow);
+    explicit Board(std::array<Tile, 19> const & tilesPerRow);
 
     /**
      * @brief Adds a new tile to the board at the given position.
@@ -40,7 +40,7 @@ public:
      * @param to_find is the Tile to find in the board.
      * @returns the position if the board contains the tile, otherwise returns std::nullopt.
      */
-    [[nodiscard]] std::optional<BoardPosition> Find(Tile const &to_find);
+    [[nodiscard]] std::optional<BoardPosition> Find(Tile const &to_find) const;
 
     /**
      * @brief The points are calculated for each direction. 
@@ -53,18 +53,19 @@ public:
 
     friend std::ostream & operator<<(std::ostream & strm, Board const & board)
     {
+        using enum OptiTake::Axis;
         // drawing the board as ascii art with the chosen tiles filled in or empty
         strm << "         ___\n";
-        strm << "     ___/ " << ToString(board.tiles[2][0], Axis::x) <<  " \\___\n";
-        strm << " ___/ " << ToString(board.tiles[1][0], Axis::x) << " \\" << ToString(board.tiles[2][0], Axis::y) << "_" << ToString(board.tiles[2][0], Axis::z) << "/ " << ToString(board.tiles[3][0], Axis::x) << " \\___\n";
-        strm << "/ " << ToString(board.tiles[0][0], Axis::x) << " \\" << ToString(board.tiles[1][0], Axis::y) << "_" << ToString(board.tiles[1][0], Axis::z) << "/ " << ToString(board.tiles[2][1], Axis::x) << " \\" << ToString(board.tiles[3][0], Axis::y) << "_" << ToString(board.tiles[3][0], Axis::z) << "/ " << ToString(board.tiles[4][0], Axis::x) << " \\\n";
-        strm << "\\" << ToString(board.tiles[0][0], Axis::y) << "_" << ToString(board.tiles[0][0], Axis::z) << "/ " << ToString(board.tiles[1][1], Axis::x) << " \\" << ToString(board.tiles[2][1], Axis::y) << "_" << ToString(board.tiles[2][1], Axis::z) << "/ " << ToString(board.tiles[3][1], Axis::x) << " \\" << ToString(board.tiles[4][0], Axis::y) << "_" << ToString(board.tiles[4][0], Axis::z) << "/\n";
-        strm << "/ " << ToString(board.tiles[0][1], Axis::x) << " \\" << ToString(board.tiles[1][1], Axis::y) << "_" << ToString(board.tiles[1][1], Axis::z) << "/ " << ToString(board.tiles[2][2], Axis::x) << " \\" << ToString(board.tiles[3][1], Axis::y) << "_" << ToString(board.tiles[3][1], Axis::z) << "/ " << ToString(board.tiles[4][1], Axis::x) << " \\\n";
-        strm << "\\" << ToString(board.tiles[0][1], Axis::y) << "_" << ToString(board.tiles[0][1], Axis::z) << "/ " << ToString(board.tiles[1][2], Axis::x) << " \\" << ToString(board.tiles[2][2], Axis::y) << "_" << ToString(board.tiles[2][2], Axis::z) << "/ " << ToString(board.tiles[3][2], Axis::x) << " \\" << ToString(board.tiles[4][1], Axis::y) << "_" << ToString(board.tiles[4][1], Axis::z) << "/\n";
-        strm << "/ " << ToString(board.tiles[0][2], Axis::x) << " \\" << ToString(board.tiles[1][2], Axis::y) << "_" << ToString(board.tiles[1][2], Axis::z) << "/ " << ToString(board.tiles[2][3], Axis::x) << " \\" << ToString(board.tiles[3][2], Axis::y) << "_" << ToString(board.tiles[3][2], Axis::z) << "/ " << ToString(board.tiles[4][2], Axis::x) << " \\\n";
-        strm << "\\" << ToString(board.tiles[0][2], Axis::y) << "_" << ToString(board.tiles[0][2], Axis::z) << "/ " << ToString(board.tiles[1][3], Axis::x) << " \\" << ToString(board.tiles[2][3], Axis::y) << "_" << ToString(board.tiles[2][3], Axis::z) << "/ " << ToString(board.tiles[3][3], Axis::x) << " \\" << ToString(board.tiles[4][2], Axis::y) << "_" << ToString(board.tiles[4][2], Axis::z) << "/\n";
-        strm << "    \\" << ToString(board.tiles[1][3], Axis::y) << "_" << ToString(board.tiles[1][3], Axis::z) << "/ " << ToString(board.tiles[2][4], Axis::x) << " \\" << ToString(board.tiles[3][3], Axis::y) << "_" << ToString(board.tiles[3][3], Axis::z) << "/\n";
-        strm << "        \\" << ToString(board.tiles[2][4], Axis::y) << "_" << ToString(board.tiles[2][4], Axis::z) << "/\n";
+        strm << "     ___/ " << ToString(board.tiles[2][0], x) <<  " \\___\n";
+        strm << " ___/ " << ToString(board.tiles[1][0], x) << " \\" << ToString(board.tiles[2][0], y) << "_" << ToString(board.tiles[2][0], z) << "/ " << ToString(board.tiles[3][0], x) << " \\___\n";
+        strm << "/ " << ToString(board.tiles[0][0], x) << " \\" << ToString(board.tiles[1][0], y) << "_" << ToString(board.tiles[1][0], z) << "/ " << ToString(board.tiles[2][1], x) << " \\" << ToString(board.tiles[3][0], y) << "_" << ToString(board.tiles[3][0], z) << "/ " << ToString(board.tiles[4][0], x) << " \\\n";
+        strm << "\\" << ToString(board.tiles[0][0], y) << "_" << ToString(board.tiles[0][0], z) << "/ " << ToString(board.tiles[1][1], x) << " \\" << ToString(board.tiles[2][1], y) << "_" << ToString(board.tiles[2][1], z) << "/ " << ToString(board.tiles[3][1], x) << " \\" << ToString(board.tiles[4][0], y) << "_" << ToString(board.tiles[4][0], z) << "/\n";
+        strm << "/ " << ToString(board.tiles[0][1], x) << " \\" << ToString(board.tiles[1][1], y) << "_" << ToString(board.tiles[1][1], z) << "/ " << ToString(board.tiles[2][2], x) << " \\" << ToString(board.tiles[3][1], y) << "_" << ToString(board.tiles[3][1], z) << "/ " << ToString(board.tiles[4][1], x) << " \\\n";
+        strm << "\\" << ToString(board.tiles[0][1], y) << "_" << ToString(board.tiles[0][1], z) << "/ " << ToString(board.tiles[1][2], x) << " \\" << ToString(board.tiles[2][2], y) << "_" << ToString(board.tiles[2][2], z) << "/ " << ToString(board.tiles[3][2], x) << " \\" << ToString(board.tiles[4][1], y) << "_" << ToString(board.tiles[4][1], z) << "/\n";
+        strm << "/ " << ToString(board.tiles[0][2], x) << " \\" << ToString(board.tiles[1][2], y) << "_" << ToString(board.tiles[1][2], z) << "/ " << ToString(board.tiles[2][3], x) << " \\" << ToString(board.tiles[3][2], y) << "_" << ToString(board.tiles[3][2], z) << "/ " << ToString(board.tiles[4][2], x) << " \\\n";
+        strm << "\\" << ToString(board.tiles[0][2], y) << "_" << ToString(board.tiles[0][2], z) << "/ " << ToString(board.tiles[1][3], x) << " \\" << ToString(board.tiles[2][3], y) << "_" << ToString(board.tiles[2][3], z) << "/ " << ToString(board.tiles[3][3], x) << " \\" << ToString(board.tiles[4][2], y) << "_" << ToString(board.tiles[4][2], z) << "/\n";
+        strm << "    \\" << ToString(board.tiles[1][3], y) << "_" << ToString(board.tiles[1][3], z) << "/ " << ToString(board.tiles[2][4], x) << " \\" << ToString(board.tiles[3][3], y) << "_" << ToString(board.tiles[3][3], z) << "/\n";
+        strm << "        \\" << ToString(board.tiles[2][4], y) << "_" << ToString(board.tiles[2][4], z) << "/\n";
         return strm;
     }
 
@@ -96,7 +97,7 @@ inline static constexpr std::array<BoardPosition, 19> allPossiblePositions{
         {5, 2}, 
         {5, 3}};
 
-inline static Board optimal_board{std::array<Tile, 19>{Tile
+inline static Board const optimal_board{std::array<Tile, 19>{Tile
         {5,6,3}, {5,6,4}, {5,2,8},
         {9,6,8}, {9,6,3}, {9,2,4}, {9,7,8},
         {1,6,4}, {1,6,8}, {1,2,3}, {1,7,4}, {1,7,8},

@@ -15,7 +15,7 @@ namespace OptiTake
     {
         // each position has the same probability to be drawn,
         int numPositions = allPossiblePositions.size() - 1;
-        std::uniform_int_distribution<> distrib(0, numPositions);
+        std::uniform_int_distribution distrib(0, numPositions);
 
         // draw a random number between 0 and the number of available tiles 
         int const positionIndex = distrib(genPos);

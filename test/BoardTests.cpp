@@ -8,7 +8,7 @@ using ::testing::Optional;
 
 class BoardTests:public::testing::Test
 {
-protected:
+public:
     Board under_test{};
 };
 
