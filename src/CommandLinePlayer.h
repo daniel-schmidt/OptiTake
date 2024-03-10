@@ -6,7 +6,7 @@ namespace OptiTake
     class CommandLinePlayer : public Player
     {
     public:
-      CommandLinePlayer(std::string playerName);
+      explicit CommandLinePlayer(std::string playerName);
 
       void SetChosenTile(Tile const &chosenTile) override;
 

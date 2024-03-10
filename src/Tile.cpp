@@ -30,12 +30,14 @@ namespace OptiTake
       * To display the tile correctly, unfilled positions are shown empty.
       * When filled, the x, y and z are filled with the corresponding numbers of the tile.
       */
+      using enum OptiTake::Axis;
+      
       switch (ax) {
-      case Axis::x:
+      case x:
         return t.empty() ? " " : std::to_string(t.x);
-      case Axis::y:
+      case y:
         return t.empty() ? "_" : std::to_string(t.y);
-      case Axis::z:
+      case z:
         return t.empty() ? "_" : std::to_string(t.z);
       default:
         assert(false);

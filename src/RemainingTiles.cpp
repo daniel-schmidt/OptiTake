@@ -18,7 +18,7 @@ namespace OptiTake
         }
         // each tile has the same probability to be drawn
         int numberTiles = availableTiles.size() - 1;
-        std::uniform_int_distribution<> distrib(0, numberTiles);
+        std::uniform_int_distribution distrib(0, numberTiles);
 
         // draw a random number between 0 and the number of available tiles 
         int chosenIndex = distrib(gen);

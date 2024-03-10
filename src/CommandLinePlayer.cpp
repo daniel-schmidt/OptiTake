@@ -8,7 +8,7 @@
 namespace OptiTake
 {    
     CommandLinePlayer::CommandLinePlayer(std::string playerName)
-        : name{playerName} 
+        : name{std::move(playerName)} 
         {
 
         }

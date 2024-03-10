@@ -55,14 +55,14 @@ int main()
 
     std::cout << "\n\n***GAME OVER***\n";
     std::vector<int> finalScores;
-    for(auto & [player, board] : playersWithBoard) {
+    for(auto const & [player, board] : playersWithBoard) {
         finalScores.emplace_back(board.GetScore());
         std::cout << player->getName() 
                   << " finished with a final score of " 
                   << board.GetScore() << " with the board: \n" << board << "\n";
     }
 
-    std::vector<int>::const_iterator bestPlayer = std::max_element(finalScores.begin(), finalScores.end());
+    std::vector<int>::const_iterator bestPlayer = std::ranges::max_element(finalScores);
     std::cout << "***The player "
               << playersWithBoard.at(std::distance(finalScores.cbegin(), bestPlayer)).first->getName()
               << " wins with the score of " << *bestPlayer << "!***\n";
