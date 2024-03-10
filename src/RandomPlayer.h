@@ -8,9 +8,7 @@ namespace OptiTake
     class RandomPlayer : public Player
     {
     public:
-        void SetChosenTile(Tile const & chosenTile) override;
-
-        BoardPosition SelectPosition() override;
+        BoardPosition SelectPosition(Tile const & chosenTile) override;
 
         std::string getName() const override;
 

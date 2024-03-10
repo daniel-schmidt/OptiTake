@@ -8,9 +8,7 @@ namespace OptiTake
     public:
       explicit CommandLinePlayer(std::string playerName);
 
-      void SetChosenTile(Tile const &chosenTile) override;
-
-      BoardPosition SelectPosition() override;
+      BoardPosition SelectPosition(Tile const & chosenTile) override;
 
       std::string getName() const override;
 

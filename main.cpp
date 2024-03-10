@@ -42,10 +42,9 @@ int main()
             std::cout << "The current board of " << player->getName() 
                       << " with the score of " << board.GetScore() 
                       << " is:\n" << board << "\n";
-            player->SetChosenTile(chosenTile);
             bool success = false;
             while (!success) {
-                success = board.SetTileToPosition(chosenTile, player->SelectPosition());
+                success = board.SetTileToPosition(chosenTile, player->SelectPosition(chosenTile));
                 if(!success) {
                     std::cout << "This is not a valid, free position. Try again!\n";
                 }

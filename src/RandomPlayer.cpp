@@ -6,12 +6,7 @@
 
 namespace OptiTake 
 {
-    void RandomPlayer::SetChosenTile(Tile const & chosenTile)
-    {
-        std::cout << "The chosen tile is:\n" << chosenTile << "\n";
-    }
-
-    BoardPosition RandomPlayer::SelectPosition()
+    BoardPosition RandomPlayer::SelectPosition(Tile const & chosenTile)
     {
         // each position has the same probability to be drawn,
         int numPositions = allPossiblePositions.size() - 1;

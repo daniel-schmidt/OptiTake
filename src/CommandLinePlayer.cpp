@@ -13,13 +13,9 @@ namespace OptiTake
 
         }
 
-    void CommandLinePlayer::SetChosenTile(Tile const & chosenTile)
+    BoardPosition CommandLinePlayer::SelectPosition(Tile const & chosenTile)
     {
         std::cout << "The chosen tile is:\n" << chosenTile << "\n";
-    }
-
-    BoardPosition CommandLinePlayer::SelectPosition()
-    {
         std::cout << "Please insert a position (format: column row): ";
         int colIndex = 0;
         int posInCol = 0;
