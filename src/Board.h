@@ -11,13 +11,34 @@ namespace OptiTake
 
 struct BoardPosition
 {
-    int colIndex; ///< 0-based column index
-    int posInCol; ///< 0-based position inside the column
+public:
+  explicit(false) BoardPosition(int colIndex, int posInCol);
 
-    auto operator<=>(BoardPosition const &) const = default;
+  auto operator<=>(BoardPosition const &) const = default;
+
+  inline int GetPosInCol() const { return posInCol; }
+  inline int GetColIndex() const { return colIndex; }
+ 
+private:
+  int colIndex; ///< 0-based column index
+  int posInCol; ///< 0-based position inside the column
+
 };
 
-std::ostream &operator<<(std::ostream &stream, BoardPosition const &pos);
+
+struct BoardPositionOneBased
+{
+public:
+    explicit(false) BoardPositionOneBased(BoardPosition const &source);
+    
+    inline int GetPosInCol() const { return posInCol; }
+    inline int GetColIndex() const { return colIndex; }
+private:
+    int colIndex; ///< 1-based column index
+    int posInCol; ///< 1-based position inside the column
+};
+
+std::ostream &operator<<(std::ostream &stream, BoardPositionOneBased const &pos);
 
 class Board
 {
@@ -81,7 +102,7 @@ private:
 };
 
 // all 19 boardPositions existing in the game
-inline static constexpr std::array<BoardPosition, 19> allPossiblePositions{
+inline static const std::array<BoardPosition, 19> allPossiblePositions{
     BoardPosition{0, 0},
     {0, 1},
     {0, 2},

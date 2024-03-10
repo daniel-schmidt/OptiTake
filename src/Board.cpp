@@ -51,9 +51,34 @@ namespace OptiTake
     }
 
 
-    std::ostream &operator<<(std::ostream &stream, BoardPosition const &pos)
+    BoardPosition::BoardPosition(int colIndex, int posInCol)
+        : colIndex(colIndex), posInCol(posInCol) 
     {
-        stream << "{" << pos.colIndex + 1 << ", " << pos.posInCol + 1<< "}";
+        if (colIndex < 0 || posInCol < 0) {
+            throw std::out_of_range{"Expected minimum of 0 for 0-based indices."};
+        }
+        if (colIndex > 4 || posInCol > 4) {
+            throw std::out_of_range{"Expected maximum of 4 for 0-based indices."};
+        }
+    }
+
+
+    BoardPositionOneBased::BoardPositionOneBased(BoardPosition const &source)
+        : colIndex(source.GetColIndex() + 1)
+        , posInCol(source.GetPosInCol() + 1)
+    {
+        if (colIndex < 1 || posInCol < 1) {
+            throw std::out_of_range{"Expected minimum of 1 for 1-based indices."};
+        }
+        if (colIndex > 5 || posInCol > 5) {
+            throw std::out_of_range{"Expected maximum of 5 for 1-based indices."};
+        }
+    }
+
+
+    std::ostream &operator<<(std::ostream &stream, BoardPositionOneBased const &pos)
+    {
+        stream << "{" << pos.GetColIndex() << ", " << pos.GetPosInCol() << "}";
         return stream;
     }
 
@@ -80,16 +105,16 @@ namespace OptiTake
 
     bool Board::SetTileToPosition(Tile const &newTile, BoardPosition pos)
     {
-        if (!IsValidColumn(pos.colIndex)){
+        if (!IsValidColumn(pos.GetColIndex())){
             return false;
         }
 
-        auto & currentCol = tiles[pos.colIndex];
-        if (!IsValidPosInCol(pos.posInCol, std::ssize(currentCol))){
+        auto & currentCol = tiles[pos.GetColIndex()];
+        if (!IsValidPosInCol(pos.GetPosInCol(), std::ssize(currentCol))){
             return false;
         }
 
-        auto & tileAtPos = currentCol[pos.posInCol];
+        auto & tileAtPos = currentCol[pos.GetPosInCol()];
         if (!IsFreePosition(tileAtPos)){
             return false;
         }
@@ -157,4 +182,5 @@ namespace OptiTake
         }
         return free;
     }
+
     } // namespace OptiTake
