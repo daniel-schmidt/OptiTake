@@ -53,7 +53,7 @@ namespace OptiTake
 
     std::ostream &operator<<(std::ostream &stream, BoardPosition const &pos)
     {
-        stream << "Pos: {" << pos.colIndex << "," << pos.posInCol << "}";
+        stream << "{" << pos.colIndex + 1 << ", " << pos.posInCol + 1<< "}";
         return stream;
     }
 

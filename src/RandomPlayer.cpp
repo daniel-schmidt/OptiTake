@@ -2,8 +2,6 @@
 
 #include "Board.h"
 
-#include <iostream>
-
 namespace OptiTake 
 {
     BoardPosition RandomPlayer::SelectPosition(Tile const & chosenTile)
@@ -15,7 +13,6 @@ namespace OptiTake
         // draw a random number between 0 and the number of available tiles 
         int const positionIndex = distrib(genPos);
         auto const [colIndex, posInCol] = allPossiblePositions[positionIndex];
-        std::cout << "The chosen position is: " << colIndex << ", " << posInCol << "\n";
 
         // The input should be 1 based for easier understanding. The colIndex and posInCol are 0 based.
         return {colIndex-1, posInCol-1};

@@ -44,9 +44,13 @@ int main()
                       << " is:\n" << board << "\n";
             bool success = false;
             while (!success) {
-                success = board.SetTileToPosition(chosenTile, player->SelectPosition(chosenTile));
-                if(!success) {
-                    std::cout << "This is not a valid, free position. Try again!\n";
+                auto const chosen_position = player->SelectPosition(chosenTile);
+                success = board.SetTileToPosition(chosenTile, chosen_position);
+                if(success) {
+                    std::cout << "The chosen position is: " << chosen_position << "\n";
+                }
+                else {
+                    std::cout << "The position " << chosen_position << " is not a valid, free position. Try again!\n";
                 }
             }
         }
