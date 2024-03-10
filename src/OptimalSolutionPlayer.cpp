@@ -10,9 +10,9 @@ OptimalSolutionPlayer::OptimalSolutionPlayer(
     : fallback_strategy(std::move(fallback_strategy_)) 
     {}
 
-BoardPosition OptimalSolutionPlayer::SelectPosition(Tile const & chosenTile) 
+BoardPosition OptimalSolutionPlayer::SelectPosition(Tile const & chosenTile, Board const & board) 
 {
-    return optimal_board.Find(chosenTile).value_or(fallback_strategy->SelectPosition(chosenTile));
+    return optimal_board.Find(chosenTile).value_or(fallback_strategy->SelectPosition(chosenTile, board));
 }
 
 std::string OptimalSolutionPlayer::getName() const 

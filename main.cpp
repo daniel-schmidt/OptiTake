@@ -44,7 +44,7 @@ int main()
                       << " is:\n" << board << "\n";
             bool success = false;
             while (!success) {
-                auto const chosen_position = player->SelectPosition(chosenTile);
+                auto const chosen_position = player->SelectPosition(chosenTile, board);
                 success = board.SetTileToPosition(chosenTile, chosen_position);
                 if(success) {
                     std::cout << "The chosen position is: " << chosen_position << "\n";

@@ -11,7 +11,7 @@ class OptimalSolutionPlayer : public Player
 public:
   explicit OptimalSolutionPlayer(std::unique_ptr<Player> fallback_strategy_);
 
-  BoardPosition SelectPosition(Tile const & chosenTile) override;
+  BoardPosition SelectPosition(Tile const & chosenTile, Board const & board) override;
 
   std::string getName() const override;
 

@@ -4,7 +4,7 @@
 
 namespace OptiTake 
 {
-    BoardPosition RandomPlayer::SelectPosition(Tile const & chosenTile)
+    BoardPosition RandomPlayer::SelectPosition(Tile const & chosenTile, Board const & board)
     {
         // each position has the same probability to be drawn,
         int numPositions = allPossiblePositions.size() - 1;
