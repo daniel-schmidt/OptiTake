@@ -12,7 +12,10 @@ OptimalSolutionPlayer::OptimalSolutionPlayer(
 
 BoardPosition OptimalSolutionPlayer::SelectPosition(Tile const & chosenTile, Board const & board) 
 {
-    return optimal_board.Find(chosenTile).value_or(fallback_strategy->SelectPosition(chosenTile, board));
+    if (auto selected = optimal_board.Find(chosenTile); selected && board.IsFree(*selected)) {
+      return *selected;
+    }
+    return fallback_strategy->SelectPosition(chosenTile, board);
 }
 
 std::string OptimalSolutionPlayer::getName() const 

@@ -183,4 +183,9 @@ namespace OptiTake
         return free;
     }
 
+    bool Board::IsFree(BoardPosition const & position) const
+    {
+        return tiles[position.GetColIndex()][position.GetPosInCol()].empty();
+    }
+
     } // namespace OptiTake

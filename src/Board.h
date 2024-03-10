@@ -77,6 +77,11 @@ public:
      */
     [[nodiscard]] std::vector<BoardPosition> GetFreePositions() const;
 
+    /**
+     * @returns true if the given position is free.
+     */
+    [[nodiscard]] bool IsFree(BoardPosition const & position) const;
+
     friend std::ostream & operator<<(std::ostream & strm, Board const & board)
     {
         using enum OptiTake::Axis;
