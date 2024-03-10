@@ -141,4 +141,20 @@ namespace OptiTake
         return score;
     }
 
+    std::vector<BoardPosition> Board::GetFreePositions() const 
+    {
+        std::vector<BoardPosition> free;
+        int col_counter = 0;
+        for (auto const & column : tiles) {
+            int row_counter = 0;
+            for (auto const & tile : column) {
+                if (tile.empty()) {
+                    free.emplace_back(col_counter, row_counter);
+                }
+                row_counter++;
+            }
+            col_counter++;
+        }
+        return free;
+    }
     } // namespace OptiTake

@@ -6,16 +6,13 @@ namespace OptiTake
 {
     BoardPosition RandomPlayer::SelectPosition(Tile const & chosenTile, Board const & board)
     {
-        // each position has the same probability to be drawn,
-        int numPositions = allPossiblePositions.size() - 1;
-        std::uniform_int_distribution distrib(0, numPositions);
+        // Each of the remaining free positions has the same probability to be drawn.
+        auto const free_positions = board.GetFreePositions();
+        auto const num_positions = static_cast<int>(free_positions.size()) - 1;
+        std::uniform_int_distribution distrib(0, num_positions);
 
-        // draw a random number between 0 and the number of available tiles 
-        int const positionIndex = distrib(genPos);
-        auto const [colIndex, posInCol] = allPossiblePositions[positionIndex];
-
-        // The input should be 1 based for easier understanding. The colIndex and posInCol are 0 based.
-        return {colIndex-1, posInCol-1};
+        // Draw a random number between 0 and the number of available tiles.
+        return free_positions[distrib(genPos)];
     }
 
     std::string RandomPlayer::getName() const 

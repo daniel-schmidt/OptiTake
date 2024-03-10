@@ -316,4 +316,16 @@ TEST_F(BoardTests, Find_WithPieceOfOptimalBoard_ReturnsPosition)
     EXPECT_THAT(under_test.Find({5,7,8}), Optional(BoardPosition{4, 1}));
 }
 
+TEST_F(BoardTests, GetFreePositions_WithEmptyBoard_ReturnsAllPositions)
+{
+    under_test = Board{};
+    EXPECT_THAT(under_test.GetFreePositions(), testing::ElementsAreArray(allPossiblePositions));
+}
+
+TEST_F(BoardTests, GetFreePositions_WithOptimalBoard_ReturnsEmptyContainer)
+{
+    under_test = optimal_board;
+    EXPECT_THAT(under_test.GetFreePositions(), testing::IsEmpty());
+}
+
 } // namespace OptiTake
