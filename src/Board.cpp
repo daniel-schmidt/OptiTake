@@ -58,6 +58,12 @@ namespace OptiTake
             throw std::out_of_range{"Expected minimum of 0 for 0-based indices."};
         }
     }
+
+    BoardPosition::BoardPosition(BoardPositionOneBased const & source)
+    : BoardPosition{source.GetColIndex() - 1, source.GetPosInCol() - 1}
+    {
+
+    }
     
     BoardPositionOneBased::BoardPositionOneBased(int colIndex, int posInCol)
         : colIndex(colIndex)

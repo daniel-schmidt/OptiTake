@@ -9,10 +9,13 @@
 namespace OptiTake
 {
 
+struct BoardPositionOneBased;
+
 struct BoardPosition
 {
 public:
   explicit(false) BoardPosition(int colIndex, int posInCol);
+  explicit(false) BoardPosition(BoardPositionOneBased const & source);
 
   auto operator<=>(BoardPosition const &) const = default;
 

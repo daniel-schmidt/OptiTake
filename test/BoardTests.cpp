@@ -39,6 +39,10 @@ TEST_F(BoardTests, BoardPositionOneBased_FromZeroBased_AddsOne)
 
     EXPECT_EQ(under_test.GetColIndex(), 1);
     EXPECT_EQ(under_test.GetPosInCol(), 1);
+
+    BoardPosition reconverted{under_test};
+    EXPECT_EQ(reconverted.GetColIndex(), 0);
+    EXPECT_EQ(reconverted.GetPosInCol(), 0);
 }
 
 TEST_F(BoardTests, SetPosition_OutsideBoardColumnTooHigh_PositionIsInvalid)
