@@ -57,24 +57,22 @@ namespace OptiTake
         if (colIndex < 0 || posInCol < 0) {
             throw std::out_of_range{"Expected minimum of 0 for 0-based indices."};
         }
-        if (colIndex > 4 || posInCol > 4) {
-            throw std::out_of_range{"Expected maximum of 4 for 0-based indices."};
-        }
     }
-
-
-    BoardPositionOneBased::BoardPositionOneBased(BoardPosition const &source)
-        : colIndex(source.GetColIndex() + 1)
-        , posInCol(source.GetPosInCol() + 1)
+    
+    BoardPositionOneBased::BoardPositionOneBased(int colIndex, int posInCol)
+        : colIndex(colIndex)
+        , posInCol(posInCol)
     {
         if (colIndex < 1 || posInCol < 1) {
             throw std::out_of_range{"Expected minimum of 1 for 1-based indices."};
-        }
-        if (colIndex > 5 || posInCol > 5) {
-            throw std::out_of_range{"Expected maximum of 5 for 1-based indices."};
-        }
+        }   
     }
 
+    BoardPositionOneBased::BoardPositionOneBased(BoardPosition const &source)
+        : BoardPositionOneBased(source.GetColIndex() + 1, source.GetPosInCol() + 1)
+    {
+     
+    }
 
     std::ostream &operator<<(std::ostream &stream, BoardPositionOneBased const &pos)
     {

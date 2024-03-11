@@ -29,6 +29,7 @@ private:
 struct BoardPositionOneBased
 {
 public:
+    explicit(false) BoardPositionOneBased(int colIndex, int posInCol);
     explicit(false) BoardPositionOneBased(BoardPosition const &source);
     
     inline int GetPosInCol() const { return posInCol; }

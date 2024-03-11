@@ -1,6 +1,7 @@
 #include "Board.h"
 
 #include <gmock/gmock.h>
+#include <stdexcept>
 
 namespace OptiTake 
 {
@@ -12,27 +13,43 @@ public:
     Board under_test{};
 };
 
+TEST_F(BoardTests, BoardPosition_WhenConstructedWithIndexTooLow_Throws)
+{
+    EXPECT_THROW(BoardPosition(-1, 1), std::out_of_range);
+    EXPECT_THROW(BoardPosition(1, -1), std::out_of_range);
+    EXPECT_THROW(BoardPositionOneBased(1, 0), std::out_of_range);
+    EXPECT_THROW(BoardPositionOneBased(0, 1), std::out_of_range);
+}
+
+TEST_F(BoardTests, BoardPosition_WhenConstructedWithMinimalIndex_IsValid)
+{
+    BoardPosition under_test(0, 0);
+    EXPECT_EQ(under_test.GetColIndex(), 0);
+    EXPECT_EQ(under_test.GetPosInCol(), 0);
+    
+    BoardPositionOneBased under_test_1(1, 1);
+    EXPECT_EQ(under_test_1.GetColIndex(), 1);
+    EXPECT_EQ(under_test_1.GetPosInCol(), 1);
+}
+
+TEST_F(BoardTests, BoardPositionOneBased_FromZeroBased_AddsOne)
+{
+    BoardPosition input{0, 0};
+    BoardPositionOneBased under_test = input;
+
+    EXPECT_EQ(under_test.GetColIndex(), 1);
+    EXPECT_EQ(under_test.GetPosInCol(), 1);
+}
+
 TEST_F(BoardTests, SetPosition_OutsideBoardColumnTooHigh_PositionIsInvalid)
 {
     bool success = under_test.SetTileToPosition({1, 2, 3}, {6, 1});
     EXPECT_FALSE(success);
 }
 
-TEST_F(BoardTests, SetPosition_OutsideBoardColumnTooLow_PositionIsInvalid)
-{
-    bool success = under_test.SetTileToPosition({1, 2, 3}, {-1, 1});
-    EXPECT_FALSE(success);
-}
-
 TEST_F(BoardTests, SetPosition_OutsideBoardPosInColTooHigh_PositionIsInvalid)
 {
     bool success = under_test.SetTileToPosition({1, 2, 3}, {1, 5});
-    EXPECT_FALSE(success);
-}
-
-TEST_F(BoardTests, SetPosition_OutsideBoardPosInColTooLow_PositionIsInvalid)
-{
-    bool success = under_test.SetTileToPosition({1, 2, 3}, {1, -1});
     EXPECT_FALSE(success);
 }
 
