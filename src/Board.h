@@ -42,7 +42,8 @@ private:
     int posInCol; ///< 1-based position inside the column
 };
 
-std::ostream &operator<<(std::ostream &stream, BoardPositionOneBased const &pos);
+std::ostream & operator<<(std::ostream & stream, BoardPositionOneBased const &pos);
+std::istream & operator>>(std::istream & stream, BoardPositionOneBased & pos);
 
 class Board
 {

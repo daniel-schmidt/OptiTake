@@ -1,6 +1,7 @@
 #include "Board.h"
 #include <algorithm>
 #include <cstddef>
+#include <istream>
 #include <numeric>
 #include <optional>
 
@@ -86,6 +87,17 @@ namespace OptiTake
         return stream;
     }
 
+    std::istream & operator>>(std::istream & stream, BoardPositionOneBased & pos)
+    {
+        int colIndex = 0;
+        int posInCol = 0;
+        stream >> colIndex >> posInCol;
+        if (stream.fail()) {
+            throw std::out_of_range{"Could not read input."};
+        }
+        pos = {colIndex, posInCol};
+        return stream;
+    }
 
     Board::Board() 
     {

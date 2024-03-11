@@ -19,13 +19,15 @@ namespace OptiTake
         while (true) {
             try {
                 std::cout << "Please insert a position (format: column row): ";
-                int colIndex = 0;
-                int posInCol = 0;
-                std::cin >> colIndex >> posInCol;
-                BoardPositionOneBased position{colIndex, posInCol};
+                BoardPositionOneBased position{1, 1};
+                std::cin >> position;
                 return position;
             } catch (std::out_of_range const &) {
-                std::cout << "The position was not valid. Enter two one-based indices, i.e. 1, 1 for the first tile in the first column.\n";
+                std::cout << "The position was not valid. Enter two one-based indices, i.e. 1 1 for the first tile in the first column.\n";
+                // Reset failbit and remove newlines which are potentially hanging around on the stream.
+                std::cin.clear();
+                std::string line;
+                std::getline(std::cin, line);
             }
         }
     }
